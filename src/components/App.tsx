@@ -13,6 +13,7 @@ import PaginationControls from "./PaginationControls";
 import ResultsCount from "./ResultsCount";
 import SearchForm from "./SearchForm";
 import SortingControls from "./SortingControls";
+import { Toaster } from "react-hot-toast";
 import { useState } from "react";
 
 function App() {
@@ -47,6 +48,8 @@ function App() {
         <JobItemContent />
       </Container>
       <Footer />
+
+      <Toaster position="top-right" />
     </>
   );
 }
