@@ -1,4 +1,5 @@
 import Header, { HeaderTop } from "./Header";
+import { PageDirection, SortBy } from "../lib/types";
 import Sidebar, { SidebarTop } from "./Sidebar";
 import { useDebounce, useJobItems } from "../lib/hooks";
 
@@ -13,7 +14,6 @@ import PaginationControls from "./PaginationControls";
 import { RESULTS_PER_PAGE } from "../lib/constants";
 import ResultsCount from "./ResultsCount";
 import SearchForm from "./SearchForm";
-import { SortBy } from "../lib/types";
 import SortingControls from "./SortingControls";
 import { Toaster } from "react-hot-toast";
 import { useState } from "react";
@@ -30,7 +30,7 @@ function App() {
   const totalNumberOfResults = jobItems?.length || 0;
   const totalNumberOfPages = totalNumberOfResults / RESULTS_PER_PAGE;
   const jobItemsSorted =
-    jobItems?.sort((a, b) => {
+    [...(jobItems || [])]?.sort((a, b) => {
       if (sortBy === "relevant") {
         return b.relevanceScore - a.relevanceScore;
       } else {
@@ -43,7 +43,7 @@ function App() {
   );
 
   // Event Handlers / Actions
-  const handleChangePage = (direction: "next" | "previous") => {
+  const handleChangePage = (direction: PageDirection) => {
     if (direction === "next") {
       setCurrentPage((prev) => prev + 1);
     } else if (direction === "previous") {
