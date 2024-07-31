@@ -2,8 +2,11 @@ import { JobItem, JobItemExpanded } from "./types";
 import { useContext, useEffect, useState } from "react";
 import { useQueries, useQuery } from "@tanstack/react-query";
 
+import { ActiveIdContext } from "../contexts/ActiveIdContextProvider";
 import { BASE_API_URL } from "./constants";
 import { BookmarksContext } from "../contexts/BookmarksContextProvider";
+import { JobItemsContext } from "../contexts/JobItemsContextProvider";
+import { SearchTextContext } from "../contexts/SearchTextContextProvider";
 import { handleError } from "./utils";
 
 // ---------------------------------------------------------------------------- //
@@ -175,6 +178,48 @@ export function useBookmarksContext() {
   if (!context) {
     throw new Error(
       "useContext(BookmarksContext) must be used within a BookmarksContextProvider"
+    );
+  }
+
+  return context;
+}
+
+// ---------------------------------------------------------------------------- //
+
+export function useActiveIdContext() {
+  const context = useContext(ActiveIdContext);
+
+  if (!context) {
+    throw new Error(
+      "iseActiveIdContext must be used within an ActiveIdContextProvider"
+    );
+  }
+
+  return context;
+}
+
+// ---------------------------------------------------------------------------- //
+
+export function useSearchTextContext() {
+  const context = useContext(SearchTextContext);
+
+  if (!context) {
+    throw new Error(
+      "useSearchTextContext must be used within an SearchTextContextProvider"
+    );
+  }
+
+  return context;
+}
+
+// ---------------------------------------------------------------------------- //
+
+export function useJobItemsContext() {
+  const context = useContext(JobItemsContext);
+
+  if (!context) {
+    throw new Error(
+      "useJobItemsContext must be used within an JobItemsContextProvider"
     );
   }
 
